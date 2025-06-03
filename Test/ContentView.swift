@@ -124,94 +124,123 @@ struct GradientButton: View {
     }
 }
 
+enum Route: Hashable {
+    case signup
+}
+
 struct ContentView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isLoading = false
     @State private var rememberMe = false
     @State private var appearAnimation = false
+    @State private var navigationPath = NavigationPath()
     
     var body: some View {
-        ZStack {
-            // Background gradient
-            LinearGradient(gradient: Gradient(colors: [
-                Color(red: 0.6, green: 0.4, blue: 0.8),
-                Color(red: 0.8, green: 0.3, blue: 0.7)
-            ]), startPoint: .topLeading, endPoint: .bottomTrailing)
-            .ignoresSafeArea()
-            
-            // Content
-            VStack(spacing: 30) {
-                Spacer()
+        NavigationStack(path: $navigationPath) {
+            ZStack {
+                // Background gradient
+                LinearGradient(gradient: Gradient(colors: [
+                    Color(red: 0.6, green: 0.4, blue: 0.8),
+                    Color(red: 0.8, green: 0.3, blue: 0.7)
+                ]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .ignoresSafeArea()
                 
-                Text("Log In")
-                    .font(.system(size: 32, weight: .bold))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                // Content
+                VStack(spacing: 30) {
+                    Spacer()
+                    
+                    Text("Log In")
+                        .font(.system(size: 32, weight: .bold))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal)
+                        .offset(x: appearAnimation ? 0 : -20)
+                        .opacity(appearAnimation ? 1 : 0)
+                    
+                    VStack(spacing: 16) {
+                        FloatingTextField(title: "login/e-mail", text: $email, isSecure: false)
+                            .offset(y: appearAnimation ? 0 : 20)
+                            .opacity(appearAnimation ? 1 : 0)
+                        
+                        FloatingTextField(title: "password", text: $password, isSecure: true)
+                            .offset(y: appearAnimation ? 0 : 20)
+                            .opacity(appearAnimation ? 1 : 0)
+                        
+                        HStack {
+                            Toggle("Remember me", isOn: $rememberMe)
+                                .foregroundColor(.white)
+                                .font(.subheadline)
+                            Spacer()
+                        }
+                        .offset(y: appearAnimation ? 0 : 20)
+                        .opacity(appearAnimation ? 1 : 0)
+                    }
                     .padding(.horizontal)
-                    .offset(x: appearAnimation ? 0 : -20)
+                    
+                    GradientButton(title: "Log In", action: {
+                        withAnimation {
+                            isLoading = true
+                        }
+                    }, isLoading: isLoading)
+                    .padding(.horizontal)
+                    .offset(y: appearAnimation ? 0 : 20)
                     .opacity(appearAnimation ? 1 : 0)
-                
-                VStack(spacing: 16) {
-                    FloatingTextField(title: "login/e-mail", text: $email, isSecure: false)
-                        .offset(y: appearAnimation ? 0 : 20)
-                        .opacity(appearAnimation ? 1 : 0)
                     
-                    FloatingTextField(title: "password", text: $password, isSecure: true)
-                        .offset(y: appearAnimation ? 0 : 20)
-                        .opacity(appearAnimation ? 1 : 0)
+                    Button("Forgot your password?") {
+                        // Add forgot password logic
+                    }
+                    .foregroundColor(.white)
+                    .font(.subheadline)
+                    .offset(y: appearAnimation ? 0 : 20)
+                    .opacity(appearAnimation ? 1 : 0)
                     
-                    HStack {
-                        Toggle("Remember me", isOn: $rememberMe)
-                            .foregroundColor(.white)
+                    VStack(spacing: 20) {
+                        Text("Log in with social account")
+                            .foregroundColor(.white.opacity(0.8))
                             .font(.subheadline)
-                        Spacer()
+                        
+                        HStack(spacing: 20) {
+                            SocialLoginButton(imageName: "g.circle.fill") {
+                                // Google login
+                            }
+                            
+                            SocialLoginButton(imageName: "apple.logo") {
+                                // Apple login
+                            }
+                            
+                            SocialLoginButton(imageName: "message.fill") {
+                                // Message login
+                            }
+                        }
                     }
                     .offset(y: appearAnimation ? 0 : 20)
                     .opacity(appearAnimation ? 1 : 0)
-                }
-                .padding(.horizontal)
-                
-                GradientButton(title: "Log In", action: {
-                    withAnimation {
-                        isLoading = true
-                    }
-                }, isLoading: isLoading)
-                .padding(.horizontal)
-                .offset(y: appearAnimation ? 0 : 20)
-                .opacity(appearAnimation ? 1 : 0)
-                
-                Button("Forgot your password?") {
-                    // Add forgot password logic
-                }
-                .foregroundColor(.white)
-                .font(.subheadline)
-                .offset(y: appearAnimation ? 0 : 20)
-                .opacity(appearAnimation ? 1 : 0)
-                
-                VStack(spacing: 20) {
-                    Text("Log in with social account")
-                        .foregroundColor(.white.opacity(0.8))
-                        .font(.subheadline)
                     
-                    HStack(spacing: 20) {
-                        SocialLoginButton(imageName: "g.circle.fill") {
-                            // Google login
-                        }
+                    HStack {
+                        Text("Don't have an account?")
+                            .foregroundColor(.white.opacity(0.8))
                         
-                        SocialLoginButton(imageName: "apple.logo") {
-                            // Apple login
-                        }
-                        
-                        SocialLoginButton(imageName: "message.fill") {
-                            // Message login
+                        NavigationLink(value: Route.signup) {
+                            Text("Sign Up")
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
                         }
                     }
+                    .font(.subheadline)
+                    .padding(.top)
+                    .offset(y: appearAnimation ? 0 : 20)
+                    .opacity(appearAnimation ? 1 : 0)
+                    
+                    Spacer()
                 }
-                .offset(y: appearAnimation ? 0 : 20)
-                .opacity(appearAnimation ? 1 : 0)
-                
-                Spacer()
+            }
+            .navigationDestination(for: Route.self) { route in
+                switch route {
+                case .signup:
+                    SignUpView(navigationPath: $navigationPath)
+                        .navigationBarBackButtonHidden()
+                }
             }
         }
         .onAppear {
