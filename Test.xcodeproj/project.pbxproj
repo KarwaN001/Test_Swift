@@ -14,6 +14,7 @@
 		9C87BFAC2DEA2B8E004EF479 /* TestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C87BFAB2DEA2B8E004EF479 /* TestTests.swift */; };
 		9C87BFB62DEA2B8E004EF479 /* TestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C87BFB52DEA2B8E004EF479 /* TestUITests.swift */; };
 		9C87BFB82DEA2B8E004EF479 /* TestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C87BFB72DEA2B8E004EF479 /* TestUITestsLaunchTests.swift */; };
+		9CB4C9EA2DEF97C4002493DD /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB4C9E92DEF97C4002493DD /* SignUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		9C87BFB12DEA2B8E004EF479 /* TestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C87BFB52DEA2B8E004EF479 /* TestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUITests.swift; sourceTree = "<group>"; };
 		9C87BFB72DEA2B8E004EF479 /* TestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9CB4C9E92DEF97C4002493DD /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				9C87BF9A2DEA2B8C004EF479 /* TestApp.swift */,
 				9C87BF9C2DEA2B8C004EF479 /* ContentView.swift */,
+				9CB4C9E92DEF97C4002493DD /* SignUpView.swift */,
 				9C87BF9E2DEA2B8E004EF479 /* Assets.xcassets */,
 				9C87BFA02DEA2B8E004EF479 /* Preview Content */,
 			);
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C87BF9D2DEA2B8C004EF479 /* ContentView.swift in Sources */,
+				9CB4C9EA2DEF97C4002493DD /* SignUpView.swift in Sources */,
 				9C87BF9B2DEA2B8C004EF479 /* TestApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
