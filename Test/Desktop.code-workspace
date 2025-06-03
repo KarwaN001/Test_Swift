@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../test 2"
+		}
+	],
+	"settings": {
+		"editor.quickSuggestions": false
+	}
+}
