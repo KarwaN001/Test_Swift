@@ -256,6 +256,16 @@ struct ContentView: View {
             withAnimation(.easeOut(duration: 0.8)) {
                 appearAnimation = true
             }
+            
+            // Add observer for logout notification
+            NotificationCenter.default.addObserver(
+                forName: NSNotification.Name("LogoutUser"),
+                object: nil,
+                queue: .main
+            ) { _ in
+                // Pop to root view (login screen)
+                navigationPath.removeLast(navigationPath.count)
+            }
         }
     }
 }

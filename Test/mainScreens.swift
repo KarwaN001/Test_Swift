@@ -31,20 +31,9 @@ struct ExploreView: View {
     }
 }
 
-struct ProfileView: View {
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Profile")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-            }
-        }
-    }
-}
-
 struct MainScreens: View {
     @State private var selectedTab = 0
+    @State private var navigationPath = NavigationPath()
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -62,7 +51,7 @@ struct MainScreens: View {
                 }
                 .tag(1)
             
-            ProfileView()
+            ProfileScreen()
                 .tabItem {
                     Image(systemName: selectedTab == 2 ? "person.fill" : "person")
                     Text("Profile")
