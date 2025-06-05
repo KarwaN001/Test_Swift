@@ -1,9 +1,3 @@
-//
-//  ProfileScreen.swift
-//  Test
-//
-//  Created by karwan Syborg on 05/06/2025.
-//
 
 import SwiftUI
 

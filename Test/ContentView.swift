@@ -1,9 +1,3 @@
-//
-//  ContentView.swift
-//  Test
-//
-//  Created by karwan Syborg on 30/05/2025.
-//
 
 import SwiftUI
 
