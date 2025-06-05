@@ -126,6 +126,7 @@ struct GradientButton: View {
 
 enum Route: Hashable {
     case signup
+    case mainScreen
 }
 
 struct ContentView: View {
@@ -181,6 +182,11 @@ struct ContentView: View {
                     GradientButton(title: "Log In", action: {
                         withAnimation {
                             isLoading = true
+                        }
+                        // Simulate login process
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                            isLoading = false
+                            navigationPath.append(Route.mainScreen)
                         }
                     }, isLoading: isLoading)
                     .padding(.horizontal)
@@ -239,6 +245,9 @@ struct ContentView: View {
                 switch route {
                 case .signup:
                     SignUpView(navigationPath: $navigationPath)
+                        .navigationBarBackButtonHidden()
+                case .mainScreen:
+                    MainScreens()
                         .navigationBarBackButtonHidden()
                 }
             }
